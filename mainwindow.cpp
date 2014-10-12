@@ -19,8 +19,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     d = new Dialog();
+    ui->Qwt_Widget->hide();
     addPlot();
     addPlotGrid();
+
 }
 
 void MainWindow::addPlot()
@@ -147,4 +149,5 @@ void MainWindow::on_pushButton_clicked()
 {    
     setPlot();    
     ui->Qwt_Widget->replot();
+    ui->Qwt_Widget->show();
 }

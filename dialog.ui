@@ -10,8 +10,21 @@
     <height>145</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
    <string>Dialog</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>img/icon.png</normaloff>img/icon.png</iconset>
+  </property>
+  <property name="windowOpacity">
+   <double>0.600000000000000</double>
   </property>
   <layout class="QFormLayout" name="formLayout">
    <item row="0" column="0">
