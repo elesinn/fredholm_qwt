@@ -142,7 +142,7 @@ void MainWindow::setPlot(int redColor,int blueColor)
     QString deltaString=QString::number(delta);
     QString alphaString=QString::number(alpha);
 
-    curv2->setTitle(QString("Z*(s), alpha= "+alphaString+", delta= "+deltaString));
+    curv2->setTitle(QString("Z*(s), α= "+alphaString+", δ= "+deltaString));
 
 
     curv2->setSamples(s,newz);
