@@ -14,11 +14,14 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    dialog.cpp
+    dialog.cpp \
+    somevalues.cpp
 
 HEADERS  += mainwindow.h \
     dialog.h \
-    gradient_descent.h
+    gradient_descent.h \
+    somevalues.h
 
 FORMS    += mainwindow.ui \
-    dialog.ui
+    dialog.ui \
+    somevalues.ui

@@ -34,7 +34,9 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     void addPlotGrid();
     void addPlot();
-    void setPlot();
+    void setZ();
+    void setPlot(int redColor,int blueColor);
+
     ~MainWindow();
 
 private slots:

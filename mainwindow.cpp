@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "dialog.h"
+#include "somevalues.h"
 #include <qwt_plot.h>
 #include <qwt_plot_marker.h>
 #include <iostream>
@@ -9,7 +10,8 @@
 #include <stdlib.h>
 #include <iomanip>
 #include <gradient_descent.h>
-
+#include "QStandardItemModel"
+#include "QStandardItem"
 #include "qwt_plot_curve.h"
 using namespace std;
 
@@ -22,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->Qwt_Widget->hide();
     addPlot();
     addPlotGrid();
-
+    setZ();
 }
 
 void MainWindow::addPlot()
@@ -44,19 +46,39 @@ void MainWindow::addPlotGrid()
     grid->attach( ui->Qwt_Widget );
 }
 
-
-
-void MainWindow::setPlot()
+void MainWindow::setZ()
 {
-    curv1=new QwtPlotCurve(QString("Z(s)"));
-    curv2= new QwtPlotCurve(QString("newZ(s)"));
-
-
+    kz z1;
+    curv1=new QwtPlotCurve(QString("Z0(s)"));
     curv1->setRenderHint(QwtPlotItem::RenderAntialiased);
     curv1->setPen(QPen(Qt::blue));
+    double a = d->getA();
+    double b = d->getB();
 
-    curv2->setPen(QPen(Qt::red));
+    double h1 = (b - a) / snum;
+    QVector<double> s(snum);
+    for (int i = 0; i<snum; i++){
+        s[i] = a + i*h1;
+    }
 
+    double q;
+    QVector<double> z(xnum);
+    for (int i = 0; i<xnum; i++){
+        q = a + i*h1;
+        z[i] = z1(q);
+    }
+
+
+    curv1->setSamples(s,z);
+    curv1->attach(ui->Qwt_Widget);
+}
+
+void MainWindow::setPlot(int redColor,int blueColor)
+{       
+
+    curv2= new QwtPlotCurve();
+
+    curv2->setPen(QPen(QColor(redColor,blueColor,0)));
     kxs k;
     kz z1;
 
@@ -88,7 +110,6 @@ void MainWindow::setPlot()
 
     QVector<double> h(snum);
     double delta = d->getDelta(); // возмущение u
-//  double delta1 = 0.001;
     double delta1 = delta;// возмущение A и A*
     for (int i = 0; i<snum; i++){
         h[i] = h_x[i] * delta / h_x_norm;
@@ -118,11 +139,13 @@ void MainWindow::setPlot()
     cout << "alpha= " << alpha << "  " << "Nev = " << nev << "  " <<"  delta= " << delta <<endl;
     QString nevText=QString::number(nev);
     ui->label_nev->setText(nevText);
+    QString deltaString=QString::number(delta);
+    QString alphaString=QString::number(alpha);
+
+    curv2->setTitle(QString("Z*(s), alpha= "+alphaString+", delta= "+deltaString));
 
 
-    curv1->setSamples(s,z);
     curv2->setSamples(s,newz);
-    curv1->attach(ui->Qwt_Widget);
     curv2->attach(ui->Qwt_Widget);
 }
 
@@ -144,10 +167,14 @@ void MainWindow::on_action_triggered()
 {    
   d->show();
 }
-
+int rColor=255;
+int bColor=0;
 void MainWindow::on_pushButton_clicked()
-{    
-    setPlot();    
+{
+
+    setPlot(rColor,bColor);
+    rColor-=10;
+    //bColor+=10;
     ui->Qwt_Widget->replot();
     ui->Qwt_Widget->show();
 }
