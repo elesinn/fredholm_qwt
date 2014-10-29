@@ -13,6 +13,7 @@
 #include "QStandardItemModel"
 #include "QStandardItem"
 #include "qwt_plot_curve.h"
+#include <QFile>
 using namespace std;
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -21,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     d = new Dialog();
+    values = new SomeValues();
     ui->Qwt_Widget->hide();
     addPlot();
     addPlotGrid();
@@ -29,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::addPlot()
 {
-    ui->Qwt_Widget->setTitle( "График" );
+    ui->Qwt_Widget->setTitle( QString("Curve") );
     ui->Qwt_Widget->setCanvasBackground( Qt::white );
     // Параметры осей координат
     ui->Qwt_Widget->setAxisTitle(QwtPlot::yLeft, "Y");
@@ -37,6 +39,13 @@ void MainWindow::addPlot()
     ui->Qwt_Widget->insertLegend( new QwtLegend() );
 
 }
+//FILE *file;
+//void exportFile(QVector<double> s,QVector<double> z0, QVector<double> newZ)
+//{
+
+//    file = fopen("values.txt", "r");
+//    fprintf(file,"%f\t %f\t %f\n",s[0],z0[0],newZ[0]);
+//}
 
 void MainWindow::addPlotGrid()
 {
@@ -142,11 +151,13 @@ void MainWindow::setPlot(int redColor,int blueColor)
     QString deltaString=QString::number(delta);
     QString alphaString=QString::number(alpha);
 
-    curv2->setTitle(QString("Z*(s), α= "+alphaString+", δ= "+deltaString));
+    curv2->setTitle(QString(QString::fromUtf8("Z*(s), α= ")+alphaString+QString::fromUtf8(", δ= ")+deltaString));
 
-
+    //exportFile(s,z,newz);
     curv2->setSamples(s,newz);
     curv2->attach(ui->Qwt_Widget);
+    values->setValue(s,z,newz);
+
 }
 
 
@@ -158,14 +169,14 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_action_2_triggered()
-{
-    close();
-}
+//void MainWindow::on_action_2_triggered()
+//{
+//    close();
+//}
 
 void MainWindow::on_action_triggered()
 {    
-  d->show();
+  d->show();  
 }
 int rColor=255;
 int bColor=0;
@@ -177,4 +188,9 @@ void MainWindow::on_pushButton_clicked()
     //bColor+=10;
     ui->Qwt_Widget->replot();
     ui->Qwt_Widget->show();
+}
+
+void MainWindow::on_actionValues_triggered()
+{
+   values->show();
 }

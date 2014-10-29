@@ -46,7 +46,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Нарисовать</string>
+     <string>Draw</string>
     </property>
    </widget>
    <widget class="QwtPlot" name="Qwt_Widget" native="true">
@@ -68,9 +68,9 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>60</x>
+      <x>50</x>
       <y>375</y>
-      <width>81</width>
+      <width>91</width>
       <height>51</height>
      </rect>
     </property>
@@ -80,13 +80,13 @@
      </font>
     </property>
     <property name="text">
-     <string>Невязка:</string>
+     <string>Difference:</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_nev">
     <property name="geometry">
      <rect>
-      <x>140</x>
+      <x>150</x>
       <y>390</y>
       <width>141</width>
       <height>21</height>
@@ -147,13 +147,25 @@
     <bool>false</bool>
    </attribute>
    <addaction name="action"/>
+   <addaction name="actionValues"/>
   </widget>
   <action name="action">
    <property name="checkable">
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Параметры</string>
+    <string>Parameters</string>
+   </property>
+   <property name="toolTip">
+    <string>Parameters</string>
+   </property>
+  </action>
+  <action name="actionValues">
+   <property name="text">
+    <string>Values</string>
+   </property>
+   <property name="toolTip">
+    <string>Values</string>
    </property>
   </action>
  </widget>

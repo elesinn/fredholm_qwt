@@ -1,13 +1,14 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
+#include <QVector>
 #include <QMainWindow>
 #include <qwt_plot.h>
 #include <qwt_plot_marker.h>
 #include <QDialog>
 #include "ui_dialog.h"
 #include "dialog.h"
-
+#include "somevalues.h"
+#include "ui_somevalues.h"
 #include <qwt_plot_grid.h>
 
 #include <qwt_legend.h>
@@ -36,15 +37,17 @@ public:
     void addPlot();
     void setZ();
     void setPlot(int redColor,int blueColor);
-
+   // void exportFile(QVector(),QVector(), QVector());
     ~MainWindow();
 
 private slots:
-    void on_action_2_triggered();
+  //  void on_action_2_triggered();
 
     void on_action_triggered();
 
     void on_pushButton_clicked();
+
+    void on_actionValues_triggered();
 
 private:
 
@@ -55,7 +58,7 @@ private:
    // QwtPlot *plot;
 
     Dialog* d;
-
+    SomeValues *values;
     Ui::MainWindow *ui;
 };
 
