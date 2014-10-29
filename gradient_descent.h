@@ -65,7 +65,6 @@ QVector<double> A_link(kxs &k, double a, double b, QVector<double> z, QVector<do
         I[i] = h*((k(s[i], a)*z[i] + k(s[i], b)*z[i]) / 2 + sum[i])+delta[i];
     }
     return I;
-
 }
 
 
