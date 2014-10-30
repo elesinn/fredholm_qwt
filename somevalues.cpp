@@ -15,6 +15,17 @@ SomeValues::~SomeValues()
     delete ui;
 }
 
+void vectorToItemToModel(QVector<double> vector,int column,QStandardItemModel *model,QStandardItem *item)
+{
+    QString tmp;
+    for(int i=0;i<vector.size();i++)
+    {
+        tmp=QString::number(vector[i]);
+        item = new QStandardItem(tmp);
+        model->setItem(i,column,item);
+    }
+}
+
 void SomeValues::setValue(QVector<double> s,QVector<double> z0, QVector<double> newZ)
 {
     QStandardItemModel *model = new QStandardItemModel;
@@ -23,33 +34,11 @@ void SomeValues::setValue(QVector<double> s,QVector<double> z0, QVector<double> 
     QStringList horizontalHeader;
     horizontalHeader.append("s");
     horizontalHeader.append("Z0(s)");
-    horizontalHeader.append("Z*(s)");
-
-    model->setHorizontalHeaderLabels(horizontalHeader);
-
-    QString tmpS;
-    QString tmpZ0;
-    QString tmpNewZ;
-    for(int i=0;i<s.size();i++)
-    {
-        tmpS=QString::number(s[i]);
-        item = new QStandardItem(tmpS);
-        model->setItem(i,0,item);
-    }
-    for(int i=0;i<s.size();i++)
-    {
-        tmpZ0=QString::number(z0[i]);
-        item = new QStandardItem(tmpZ0);
-        model->setItem(i,1,item);
-    }
-
-    for(int i=0;i<s.size();i++)
-    {
-        tmpNewZ=QString::number(newZ[i]);
-        item = new QStandardItem(tmpNewZ);
-        model->setItem(i,2,item);
-    }
-
+    horizontalHeader.append("Z*(s)");        
+    model->setHorizontalHeaderLabels(horizontalHeader);    
+    vectorToItemToModel(s,0,model,item);
+    vectorToItemToModel(z0,1,model,item);
+    vectorToItemToModel(newZ,2,model,item);
     ui->tableView->setModel(model);
 }
 
