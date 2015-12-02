@@ -8,7 +8,7 @@
 #include <iomanip>
 
 using namespace std;
-
+int graphNumb = 4;
 const int snum = 50;
 const int xnum = 50;
 
@@ -30,19 +30,19 @@ class kz
 public:
     double  operator() (double s)
     {
-        switch (4)
+        switch (graphNumb)
         {
-            case 1:
+            case 0:
                return 20*s*(s-0.5)*(s-0.5);
-            case 2:
+            case 1:
                return 4*s*(1 - s);
-            case 3:
+            case 2:
                return 1 / (100 * s*s + 1);
-            case 4:
+            case 3:
                return atan(s);
-            case 5:
+            case 4:
                return  ((exp(-((s - 0.3)*(s - 0.3)) / 0.06) + exp(-((s - 0.3)*(s - 0.3)) / 0.06)) / 0.09550408) - 0.052130913;
-            case 6:
+            case 5:
                return exp(-((s - 0.5)*(s-0.5))/0.06);
         }
     }

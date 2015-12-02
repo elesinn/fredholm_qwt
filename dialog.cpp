@@ -17,3 +17,8 @@ void Dialog::on_buttonBox_accepted()
 {
 
 }
+
+void Dialog::on_comboBox_activated(const QString &arg1)
+{
+
+}

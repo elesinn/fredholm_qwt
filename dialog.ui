@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>204</width>
-    <height>145</height>
+    <width>278</width>
+    <height>177</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -17,14 +17,11 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Parameters</string>
   </property>
   <property name="windowIcon">
    <iconset>
     <normaloff>img/icon.png</normaloff>img/icon.png</iconset>
-  </property>
-  <property name="windowOpacity">
-   <double>0.600000000000000</double>
   </property>
   <layout class="QFormLayout" name="formLayout">
    <item row="0" column="0">
@@ -37,7 +34,7 @@
    <item row="0" column="1">
     <widget class="QLineEdit" name="lineEdit_a">
      <property name="text">
-      <string>-1</string>
+      <string>-2</string>
      </property>
     </widget>
    </item>
@@ -51,7 +48,7 @@
    <item row="1" column="1">
     <widget class="QLineEdit" name="lineEdit_b">
      <property name="text">
-      <string>1</string>
+      <string>2</string>
      </property>
     </widget>
    </item>
@@ -83,7 +80,46 @@
      </property>
     </widget>
    </item>
-   <item row="4" column="0" colspan="2">
+   <item row="5" column="0">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>z(s)</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QComboBox" name="comboBox">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <item>
+      <property name="text">
+       <string>20*s*(s-0.5)*(s-0.5);</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4*s*(1 - s);</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1 / (100 * s*s + 1);</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>atan(s);</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>((exp(-((s - 0.3)*(s - 0.3)) / 0.06) + exp(-((s - 0.3)*(s - 0.3)) / 0.06)) / 0.09550408) - 0.052130913</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="6" column="0" colspan="2">
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>

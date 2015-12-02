@@ -23,6 +23,7 @@
 #include <qwt_plot_picker.h>
 
 #include <qwt_picker_machine.h>
+
 namespace Ui {
 class MainWindow;
 }
@@ -48,6 +49,8 @@ private slots:
     void on_pushButton_clicked();
 
     void on_actionValues_triggered();
+
+    void on_pushButton_2_clicked();
 
 private:
 

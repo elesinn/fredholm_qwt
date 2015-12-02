@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "dialog.h"
+
 #include "somevalues.h"
 #include <qwt_plot.h>
 #include <qwt_plot_marker.h>
@@ -24,9 +24,6 @@ MainWindow::MainWindow(QWidget *parent) :
     d = new Dialog();
     values = new SomeValues();
     ui->Qwt_Widget->hide();
-    addPlot();
-    addPlotGrid();
-    setZ();
 }
 
 void MainWindow::addPlot()
@@ -36,8 +33,7 @@ void MainWindow::addPlot()
     // Параметры осей координат
     ui->Qwt_Widget->setAxisTitle(QwtPlot::yLeft, "Y");
     ui->Qwt_Widget->setAxisTitle(QwtPlot::xBottom, "X");
-    ui->Qwt_Widget->insertLegend( new QwtLegend() );
-
+    ui->Qwt_Widget->insertLegend( new QwtLegend() );    
 }
 //FILE *file;
 //void exportFile(QVector<double> s,QVector<double> z0, QVector<double> newZ)
@@ -49,7 +45,6 @@ void MainWindow::addPlot()
 
 void MainWindow::addPlotGrid()
 {
-
     QwtPlotGrid *grid = new QwtPlotGrid();
     grid->setMajorPen(QPen( Qt::gray, 2 ));
     grid->attach( ui->Qwt_Widget );
@@ -57,6 +52,7 @@ void MainWindow::addPlotGrid()
 
 void MainWindow::setZ()
 {
+    graphNumb = d->getNumb();
     kz z1;
     curv1=new QwtPlotCurve(QString("Z0(s)"));
     curv1->setRenderHint(QwtPlotItem::RenderAntialiased);
@@ -83,10 +79,9 @@ void MainWindow::setZ()
 }
 
 void MainWindow::setPlot(int redColor,int blueColor)
-{       
-
+{
+    graphNumb = d->getNumb();
     curv2= new QwtPlotCurve();
-
     curv2->setPen(QPen(QColor(redColor,blueColor,0)));
     kxs k;
     kz z1;
@@ -176,14 +171,22 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_action_triggered()
 {    
-  d->show();  
+  d->show();
 }
 int rColor=255;
 int bColor=0;
 void MainWindow::on_pushButton_clicked()
 {
+    if (ui->Qwt_Widget->isHidden())
+    {
+        rColor=255;
 
+        addPlot();
+        addPlotGrid();
+        setZ();
+    }
     setPlot(rColor,bColor);
+
     rColor-=10;
     //bColor+=10;
     ui->Qwt_Widget->replot();
@@ -192,5 +195,11 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_actionValues_triggered()
 {
-   values->show();
+   values->show();   
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    ui->Qwt_Widget->hide();
+    ui->Qwt_Widget->detachItems();
 }

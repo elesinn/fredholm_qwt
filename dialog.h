@@ -39,8 +39,15 @@ public:
         return ui->lineEdit_delta->text().toDouble();
     }
 
+    int getNumb()
+    {
+        return ui->comboBox->currentIndex();
+    }
+
 private slots:
     void on_buttonBox_accepted();
+
+    void on_comboBox_activated(const QString &arg1);
 
 public:
     Ui::Dialog *ui;
