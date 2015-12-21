@@ -197,7 +197,7 @@ double funcgrad(double beta, QVector<double> lambda, QVector<double> grad, QVect
 ///нахождение шага с помощью золотого сечения
 double zoloto(double a, double b, QVector<double> grad, QVector<double> lambda, QVector<double> &s, double alpha, QVector<double> u,QVector<double> delta)
 {
-    double eps = 0.00001;
+    double eps = 0.000000000001;
     double x1 = a + (1 - (sqrt(5) - 1) / 2)*(b - a);
     double x2 = a + ((sqrt(5) - 1) / 2)*(b - a);
     double y1 = funcgrad(x1, lambda, grad, s, -1, 1, alpha, u,delta);
@@ -264,7 +264,7 @@ double step(QVector<double> lambda, QVector<double> grad, QVector<double> &s, do
 ///Поиск шага с помощью метода дихотомии
 double diht(double a, double b, QVector<double> grad, QVector<double> lambda, QVector<double> &s, double alpha, QVector<double> u,QVector<double> delta)
 {
-    double eps = 0.000001;
+    double eps = 0.000000000001;
 
     while ((b - a)>eps)
     {
@@ -285,7 +285,7 @@ double diht(double a, double b, QVector<double> grad, QVector<double> lambda, QV
 
 QVector<double> GradDown(QVector<double> lambda, QVector<double> s, double alpha, double a, double b, QVector<double> u,QVector<double> delta)
 {
-    double eps = 0.00001;
+    double eps = 0.000000000001;
     QVector<double> curr = lambda;
     QVector<double> last;
     QVector<double> grad;

@@ -22,8 +22,14 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     d = new Dialog();
-    values = new SomeValues();
+    values = new SomeValues();    
     ui->Qwt_Widget->hide();
+    ui->label_alpha->hide();
+    ui->label_delta->hide();
+    ui->label_deltaalpha->hide();
+    ui->label->hide();
+    ui->label_2->hide();
+    ui->label_3->hide();
 }
 
 void MainWindow::addPlot()
@@ -127,7 +133,9 @@ void MainWindow::setPlot(int redColor,int blueColor)
         u_delta[i] = u[i] + h[i];
     }
     double alpha=d->getAlpha();
-
+    setAlpha(QString::number(alpha));
+    setDelta(QString::number(delta));
+    setDeltaAlpha(QString::number(delta/alpha));
     res = GradDown(lambda, s, alpha, a, b, u_delta,hhh);
     QVector<double> newz(xnum);
 
@@ -142,7 +150,7 @@ void MainWindow::setPlot(int redColor,int blueColor)
     double nev = norm(a, b, new1);
     cout << "alpha= " << alpha << "  " << "Nev = " << nev << "  " <<"  delta= " << delta <<endl;
     QString nevText=QString::number(nev);
-    ui->label_nev->setText(nevText);
+    //ui->label_nev->setText(nevText);
     QString deltaString=QString::number(delta);
     QString alphaString=QString::number(alpha);
 
@@ -162,6 +170,21 @@ void MainWindow::setPlot(int redColor,int blueColor)
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::setAlpha(QString text)
+{
+    ui->label_alpha->setText(text);
+}
+
+void MainWindow::setDelta(QString text)
+{
+    ui->label_delta->setText(text);
+}
+
+void MainWindow::setDeltaAlpha(QString text)
+{
+    ui->label_deltaalpha->setText(text);
 }
 
 //void MainWindow::on_action_2_triggered()
@@ -190,16 +213,29 @@ void MainWindow::on_pushButton_clicked()
     rColor-=10;
     //bColor+=10;
     ui->Qwt_Widget->replot();
+    ui->label_alpha->show();
+    ui->label_deltaalpha->show();
+    ui->label_delta->show();
     ui->Qwt_Widget->show();
+    ui->label->show();
+    ui->label_2->show();
+    ui->label_3->show();
 }
 
 void MainWindow::on_actionValues_triggered()
 {
-   values->show();   
+   values->show();
 }
 
 void MainWindow::on_pushButton_2_clicked()
 {
+    ui->Qwt_Widget->hide();
+    ui->label_alpha->hide();
+    ui->label_delta->hide();
+    ui->label_deltaalpha->hide();
+    ui->label->hide();
+    ui->label_2->hide();
+    ui->label_3->hide();
     ui->Qwt_Widget->hide();
     ui->Qwt_Widget->detachItems();
 }

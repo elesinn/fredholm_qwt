@@ -37,9 +37,14 @@ public:
     void addPlotGrid();
     void addPlot();
     void setZ();
-    void setPlot(int redColor,int blueColor);
-   // void exportFile(QVector(),QVector(), QVector());
+    void setPlot(int redColor,int blueColor);    
+
+    void setAlpha(QString text);
+    void setDelta(QString text);
+    void setDeltaAlpha(QString text);
     ~MainWindow();
+
+
 
 private slots:
   //  void on_action_2_triggered();
@@ -59,7 +64,6 @@ private:
     QwtPlotCurve *curv1;
     QwtPlotCurve *curv2;
    // QwtPlot *plot;
-
     Dialog* d;
     SomeValues *values;
     Ui::MainWindow *ui;

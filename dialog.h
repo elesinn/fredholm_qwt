@@ -49,6 +49,10 @@ private slots:
 
     void on_comboBox_activated(const QString &arg1);
 
+    void on_lineEdit_delta_textChanged(const QString &arg1);
+
+    void on_lineEdit_alpha_textChanged(const QString &arg1);
+
 public:
     Ui::Dialog *ui;
 };
